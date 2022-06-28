@@ -1,0 +1,58 @@
+﻿@model IEnumerable<prjMVCCoreDemo.Models.TProduct>
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>線上購物</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                序
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FQty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FPrice)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@{
+    int count = 0;
+    foreach (var item in Model)
+    {
+        count++;
+        <tr>
+            <td>
+                @count
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FPrice)
+            </td>
+            <td>
+                @Html.ActionLink("加入Session", "AddToSession", "Shopping", new { id = item.FId }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                
+            </td>
+        </tr>
+        }
+    }
+    </tbody>
+</table>

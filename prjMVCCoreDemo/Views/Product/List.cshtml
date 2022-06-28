@@ -1,0 +1,74 @@
+﻿@model IEnumerable<prjMVCCoreDemo.Models.TProduct>
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>產品列表</h1>
+@using (Html.BeginForm())
+{
+    @:關鍵字 @Html.TextBox("txtKeyword")
+    <input type="submit" value="搜尋" class="btn btn-primary" />    
+    <br />
+}
+<p>
+    <a asp-action="Create">新增產品</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                序
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FQty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FPrice)
+            </th>
+            <th>
+                產品圖片
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int count = 0;
+            foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <td>
+                        @count
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FCost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FQty)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FPrice)
+                    </td>
+                    <td>
+                        <img src="~/Images/@item.FImagePath" width="80" height="40" />
+                    </td>
+                    <td>
+                        @Html.ActionLink("修改", "Edit", new { id = item.FId })  |
+                        @Html.ActionLink("刪除", "Delete", "Product", new { id = item.FId }, new { onclick = "return confirm('確定要刪除嗎?')" })
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
