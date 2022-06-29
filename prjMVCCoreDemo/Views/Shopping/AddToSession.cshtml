@@ -1,0 +1,40 @@
+﻿@model prjMVCCoreDemo.Models.TProduct
+
+@{
+    ViewData["Title"] = "AddToSession";
+}
+
+<h1>加入購物車</h1>
+
+<h4>請輸入購買數量</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddToSession"> 
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <input type="hidden" name="txtFId" value="@Model.FId" />
+            <div class="form-group">
+                <div class="col-md-10">
+                    數量
+                    <br />
+                    @Html.TextBox("txtCount", "1", new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-0 col-md-10">
+                    <input type="submit" value="購買" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="List">返回線上購物</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

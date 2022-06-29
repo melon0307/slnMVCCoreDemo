@@ -1,0 +1,75 @@
+﻿@model IEnumerable<prjMVCCoreDemo.Models.CShoppingCartItem>
+
+@{
+    ViewData["Title"] = "CartView";
+}
+
+<h1>檢視購物車</h1>
+
+<p>
+    <a asp-action="Create">結帳</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                序
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.product.FName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.count)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.小計)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int count = 0;
+            decimal pay = 0,
+                    tax = 0;
+            foreach (var item in Model)
+            {
+                count++;
+                pay += item.小計;
+                <tr>
+                    <td>
+                        @count
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.product.FName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.count)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.小計)
+                    </td>
+                    <td>
+                        @Html.ActionLink("修改", "Edit", "Shopping", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-success" }) |
+                        @Html.ActionLink("取消", "Delete", "Shopping", new { id = (count - 1) }, new { @class = "btn btn-danger", onclick = "return confirm('確定要刪除嗎?')" })
+                    </td>
+                </tr>
+            }
+            tax = pay * 0.05m;
+        }
+    </tbody>
+</table>
+<p>
+    <li>交易金額: @pay.ToString("0")</li>
+    <li>稅   額: @tax.ToString("0")</li>
+    <li>應付金額: @((pay+tax).ToString("0"))</li>
+</p>
+<div>
+    <a asp-action="List">返回線上購物</a>
+</div>

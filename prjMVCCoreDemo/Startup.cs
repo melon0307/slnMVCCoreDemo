@@ -51,7 +51,7 @@ namespace prjMVCCoreDemo
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Product}/{action=List}/{id?}");
+                    pattern: "{controller=Home}/{action=LogIn}/{id?}");
             });
         }
     }

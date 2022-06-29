@@ -1,4 +1,4 @@
-﻿@model IEnumerable<prjMVCCoreDemo.Models.TProduct>
+﻿@model IEnumerable<prjMVCCoreDemo.ViewModels.CProductViewModel>
 
 @{
     ViewData["Title"] = "List";
@@ -7,7 +7,7 @@
 <h1>線上購物</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="CartView">檢視購物車</a>
 </p>
 <table class="table">
     <thead>
@@ -28,31 +28,31 @@
         </tr>
     </thead>
     <tbody>
-@{
-    int count = 0;
-    foreach (var item in Model)
-    {
-        count++;
-        <tr>
-            <td>
-                @count
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FQty)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FPrice)
-            </td>
-            <td>
-                @Html.ActionLink("加入Session", "AddToSession", "Shopping", new { id = item.FId }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                
-            </td>
-        </tr>
+        @{
+            int count = 0;
+            foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <td>
+                        @count
+                    </td>
+                    <td>
+                        <img src="~/Images/@item.FImagePath" width="180" height="130" />
+                        <br />
+                        <h3>@Html.DisplayFor(modelItem => item.FName)</h3>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FQty)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FPrice)
+                    </td>
+                    <td>
+                        @Html.ActionLink("加入Session", "AddToSession", "Shopping", new { id = item.FId })                        
+                    </td>
+                </tr>
+            }
         }
-    }
     </tbody>
 </table>
